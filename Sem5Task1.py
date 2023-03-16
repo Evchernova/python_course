@@ -7,3 +7,37 @@
 сообщать ему об ошибке и снова запрашивать знак операции.
 Также сообщать пользователю о невозможности деления на ноль,
 если он ввел 0 в качестве делителя."""
+
+import operator
+
+list_operators = {
+    "-": operator.sub,
+    "+": operator.add,
+    "*": operator.mul,
+    "/": operator.truediv}
+
+
+def calculator(a, b, z):
+    z = input("Введите знак умножения *, деления /,  вычитания - или сложения +: ")
+    a = int(input("Введите первое число: "))
+    b = int(input("Введите второе число: "))
+
+    if b == 0 and z == "/":
+        print("Ошибка ввода, нельзя делить на 0 ")
+        b = int(input("Введите второе число: "))
+
+    while z != '0' and z not in list_operators:
+        print("Ошибка ввода")
+        z = input("Введите знак умножения *, деления / или вычитания :")
+
+    if z == '0':
+        print('Конец игры')
+    else:
+        print(list_operators[z](a, b))
+        return (str(calculator(a, b, z)))
+
+
+a = None
+b = None
+z = None
+print(calculator(a, b, z))
