@@ -8,3 +8,24 @@ length (длина в метрах), width (ширина в метрах).
 Массу и толщину сделать публичными атрибутами.
 Проверить работу метода.
 Например: 20м*5000м*25кг*0.05м = 125000 кг = 125 т"""
+
+
+class Road:
+    def __init__(self, _length, _width):
+        self._length = _length
+        self._width = _width
+
+    def mass(self):
+        self._fat = 0.05
+        return self._length * self._width * self.volume * self._fat
+
+
+class MassCount(Road):
+    def __init__(self, _length, _width, volume):
+        super().__init__(_length, _width)
+        self.volume = volume
+
+
+
+r = MassCount(20, 5000, 25)
+print(r.mass())
