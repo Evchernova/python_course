@@ -6,3 +6,12 @@
 
  *Попытайтесь получить кодовые точки без онлайн-конвертера!
  без хардкода!"""
+
+words = ['разработка', 'сокет', 'декоратор']
+
+for el in words:
+    print(f"тип: {type(el)}, содержание:  {el}")
+
+for el in words:
+    f = el.encode('unicode_escape').decode("utf-8")
+    print(f"тип: {type(f)}, содержание:  {f}")
