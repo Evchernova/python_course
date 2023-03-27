@@ -1,23 +1,31 @@
-"""Реализовать класс Road (дорога), в котором определить защищенные атрибуты:
-length (длина в метрах), width (ширина в метрах).
-Значения данных атрибутов должны передаваться при создании экземпляра класса.
-Реализовать публичный метод расчета массы асфальта, необходимого для покрытия
-всего дорожного полотна.
-Использовать формулу: длина * ширина * масса асфальта для покрытия одного кв
-метра дороги асфальтом, толщиной в 1 см * число м толщины полотна.
-Массу и толщину сделать публичными атрибутами.
-Проверить работу метода.
-Например: 20м*5000м*25кг*0.05м = 125000 кг = 125 т"""
+"""Реализовать дескрипторы для любых двух классов"""
 
+class NonNegative:
+    def __get__(self, instance, owner):
+        return instance.__dict__[self.my_attr]
+
+    def __set__(self, instance, value):
+        if value < 0:
+            raise ValueError("Не может быть отрицательным")
+        instance.__dict__[self.my_attr] = value
+
+    def __delete__(self, instance):
+        del instance.__dict__[self.my_attr]
+
+    def __set_name__(self, owner, my_attr):
+        self.my_attr = my_attr
 
 class Road:
-    def __init__(self, _length, _width):
+    _length = NonNegative()
+    _width = NonNegative()
+    def __init__(self, _length=150, _width=200):
         self._length = _length
         self._width = _width
+        print("Длина {} м, ширина {} м".format(self._length, self._width))
 
-    def mass(self):
-        self._fat = 0.05
-        return self._length * self._width * self.volume * self._fat
+    def square(self):
+        self.square_rd = self._length * self._width
+        return self.square_rd
 
 
 class MassCount(Road):
@@ -26,6 +34,6 @@ class MassCount(Road):
         self.volume = volume
 
 
-
+rd1 = Road(_length=150, _width=200)
 r = MassCount(20, 5000, 25)
-print(r.mass())
+print(r.square())
